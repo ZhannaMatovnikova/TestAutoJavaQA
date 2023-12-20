@@ -1,24 +1,24 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class MainPage {
+public class MainPage { //описание основной стр mail.ru
     private WebDriver driver;
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    private By loginMainButton = By.xpath(""); //
-    private By accountNameField = By.xpath("");
-    private By addPasswordButton = By.xpath("");
-    private By PasswordField = By.xpath("");
-    private By loginButtonForm = By.xpath("");
-    private By iconAvatar = By.xpath("");
-    private By linkEmailAvatar = By.xpath("");
-    private By newMessageButton = By.xpath("");
-    private By adddressField = By.xpath("");
-    private By themeField = By.xpath("");
-    private By messageBodyField = By.xpath("");
-    private By saveMessageButton = By.xpath("");
+    private By loginMainButton = By.xpath("(//button[text()='Войти'])[1]"); //
+    private By accountNameField = By.xpath("//input[@name='username']");
+//    private By domenName = By.xpath("//input[@name='username']"); подумать о домене
+
+    private By addPasswordButton = By.xpath("//button//span[text()='Ввести пароль']");
+    private By PasswordField = By.xpath("//input[@name='password']");
+    private By loginButtonForm = By.xpath("//button[@type='submit']");
+
+
+
+
+
 
 
 
