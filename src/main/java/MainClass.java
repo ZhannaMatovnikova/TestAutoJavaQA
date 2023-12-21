@@ -1,4 +1,4 @@
-import org.checkerframework.checker.units.qual.C;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -13,6 +13,15 @@ public class MainClass {
         driver.get("https://mail.ru/");
 
         MainPage mainPage = new MainPage(driver);
+        mainPage.clickSignIn();
+        String mainWindow = driver.getWindowHandle(); //задаем главное окно
+
+        for (String windowHandle:driver.getWindowHandles()){ //переключаемся на новое окно
+            driver.switchTo().window(windowHandle);
+        }
+        driver.findElement(By.xpath("//div[@class='wrapper-0-2-5']//input[@name='Login']")).sendKeys("12345");
+
+
 
         driver.quit();
     }
