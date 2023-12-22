@@ -24,6 +24,10 @@ JDK 17
 Apache Maven v 3.9.5
 
 Системная переменная M2_HOME - полный путь к apache-maven-3.9.5
+
+jUnit 4.13.2
+
+Selenium 4.16.0
 ____
 UI тесты на публичный почтовый сервис: Mail.ru
 
