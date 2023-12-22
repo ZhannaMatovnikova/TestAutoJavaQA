@@ -13,11 +13,12 @@ public class MainClassTest { //проверяю тесты модульно
     private MainPageSimple mainPageSimple;
     private  PochtaLogedInPage pochtaLogedInPage;
     private DraftFolderPage draftFolderPage;
+    private SendMessagesPage sendMessagesPage;
 
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Жанна\\IdeaProjects\\untitled2\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Жанна\\IdeaProjects\\driver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -26,6 +27,7 @@ public class MainClassTest { //проверяю тесты модульно
         mainPageSimple = new MainPageSimple(driver);
         pochtaLogedInPage = new PochtaLogedInPage(driver);
         draftFolderPage = new DraftFolderPage(driver);
+        sendMessagesPage = new SendMessagesPage(driver);
 
     }
 
@@ -35,22 +37,27 @@ public class MainClassTest { //проверяю тесты модульно
         PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
         String email = pochtaLogedInPage.getTextLinkEmail();
         Assert.assertEquals("test20122023@mail.ru", email);//проверить, что вход выполнен успешно
-        PochtaLogedInPage writeNewMessage = pochtaLogedInPage.writeNewMessageAndClickSave();//создать новое письмо (заполнить адресата, тему письма и тело), cj[hfybnm
-        DraftFolderPage goToDrafts = pochtaLogedInPage.clickDrafts();//
-        DraftFolderPage lastMessage = draftFolderPage.findMessage("Сообщение");
-//        String address = draftFolderPage.getTextAddress();
-//        Assert.assertEquals("test1@mail.ru", address);
-//        String theme = draftFolderPage.getTextTheme();
-//        Assert.assertEquals("Тема", theme);
-//        String text = draftFolderPage.getTextTextMessage();
-//        Assert.assertEquals("Сообщение",text);
+        PochtaLogedInPage writeNewMessage = pochtaLogedInPage.writeNewMessageAndClickSave();//создать новое письмо (заполнить адресата, тему письма и тело), сохранить как черновик
+        DraftFolderPage goToDrafts = pochtaLogedInPage.clickDrafts();// Проверить сохранение в черновиках
+        String address = draftFolderPage.getTextAddress();
+        String theme = draftFolderPage.getTextTheme();
+        if(address.equals("test@mail.ru") && theme.equals("Тема"));{ //проверить  тему письма и адресата
+        DraftFolderPage lastMessage = draftFolderPage.clickLastMessage();} //если предыдущие условия ок, то переход на ссылку с письмом, содержащей текст письма, так закрываем 3ю проверку
+        DraftFolderPage sendMessage = draftFolderPage.sendTheMail(); //Отправить письмо
+        DraftFolderPage closeWindow = draftFolderPage.closeWindow(); //закрыть окно после отправки письма
+//      if (!address.equals("test@mail.ru") && !theme.equals("Тема"));{ //проверить  тему письма и адресата последнего письма в черновиках
+        DraftFolderPage clickFolderSendMessages = draftFolderPage.clickFolderSendMessages(); //переход в папку Отправленные
+       String address1 = sendMessagesPage.getTextEmail();
+       String theme1 = sendMessage.getTextTheme();
+       if(address1.equals("test@mail.ru") && theme1.equals("Тема"));{ // проверка последней темы письма и адреса отправки
+           SendMessagesPage logout = sendMessagesPage.logout(); //выход из учетной записи
+        }
 
-    }
-
+        }
 
 
 //    @After
-//    public void tearDown () {
-//        driver.quit();
-//    }
+//    public void tearDown(){
+//        driver.quit();}
+
 }

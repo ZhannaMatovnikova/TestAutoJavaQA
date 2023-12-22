@@ -12,7 +12,7 @@ public class PochtaLogedInPage { //описание основной стран�
     private By draftLink = By.xpath("//div[text()='Черновики']");
 
     private By iconAvatar = By.cssSelector("img.ph-avatar-img.svelte-dfhuqc");
-    private By linkEmailAvatar = By.cssSelector("div.ph-desc__email.svelte-1popff4"); //отображается почта личного кабинета
+    private By linkEmailAvatar = By.xpath("(//div[@class='ph-text svelte-1popff4'])[1]//div[2]/div[1]"); // отображается почта личного кабинета
     private By newMessageButton = By.xpath("//span[text()='Написать письмо']");
     private By adddressField = By.xpath("//div[@class='input--3slxg']//input");
     private By themeField = By.xpath("//div[@class='subject__container--HWnat']//input");
@@ -46,7 +46,7 @@ public class PochtaLogedInPage { //описание основной стран�
     }
 
     public PochtaLogedInPage writeNewMessageAndClickSave(){
-        this.writeNewMessage("test1@mail.ru", "Тема", "Сообщение");
+        this.writeNewMessage("test@mail.ru", "Тема", "Сообщение");
         this.saveMessageClick();
         this.closeFormMessage();
         return this;
