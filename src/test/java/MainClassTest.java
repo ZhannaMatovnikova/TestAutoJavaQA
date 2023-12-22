@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,8 +57,8 @@ public class MainClassTest { //проверяю тесты модульно
         }
 
 
-//    @After
-//    public void tearDown(){
-//        driver.quit();}
+    @After
+    public void tearDown(){
+        driver.quit();}
 
 }
