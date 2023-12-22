@@ -13,4 +13,25 @@ public class DraftFolderPage { // описание страницы при пе�
     private By sendButton = By.xpath("");// кнопка отправить из черновика
     private By sendMessagesButton = By.xpath("//button//span[text()='Отправить']");// переход в папку отправленные из черновиков после отправки возможно подождать 20-21 с
     private By windowTheMessageIsSend = By.xpath("//div[text()='Отправленные']");// переход в папку отправленные из черновиков
+
+    public DraftFolderPage clickLastMessage(){
+        driver.findElement(draftMessageSavedLastInFolder).click();
+        return this;
+    }
+    public String getTextAddress(){
+        return driver.findElement(draftAddressMessage).getText();
+    }
+    public String getTextTheme(){
+        return driver.findElement(draftThemeMessage).getText();
+    }
+    public String getTextTextMessage(){
+        return driver.findElement(draftTextMessage).getText();
+    }
+    public DraftFolderPage findMessage(String textMessage){    //, String textAddress, String textTheme
+        driver.findElement(By.tagName(textMessage)).click();
+        return this;
+
+    }
+
+
 }

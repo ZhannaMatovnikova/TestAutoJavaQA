@@ -45,7 +45,7 @@ public class PochtaLogedInPage { //описание основной стран�
         return this;
     }
 
-    public PochtaLogedInPage writeNewMessageAndClick(){
+    public PochtaLogedInPage writeNewMessageAndClickSave(){
         this.writeNewMessage("test1@mail.ru", "Тема", "Сообщение");
         this.saveMessageClick();
         this.closeFormMessage();

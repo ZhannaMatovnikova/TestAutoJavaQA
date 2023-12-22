@@ -12,6 +12,7 @@ public class MainClassTest { //проверяю тесты модульно
 //    private MainPage mainPage;
     private MainPageSimple mainPageSimple;
     private  PochtaLogedInPage pochtaLogedInPage;
+    private DraftFolderPage draftFolderPage;
 
 
     @Before
@@ -24,17 +25,26 @@ public class MainClassTest { //проверяю тесты модульно
 //        mainPage = new MainPage(driver);
         mainPageSimple = new MainPageSimple(driver);
         pochtaLogedInPage = new PochtaLogedInPage(driver);
+        draftFolderPage = new DraftFolderPage(driver);
 
     }
 
     @Test
     public void csenario1() {
-        PochtaLogedInPage mp = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");
+        PochtaLogedInPage mp = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");// войти в почту
         PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
         String email = pochtaLogedInPage.getTextLinkEmail();
-        Assert.assertEquals("test20122023@mail.ru", email);
-        PochtaLogedInPage writeNewMessage = pochtaLogedInPage.writeNewMessageAndClick();
-        DraftFolderPage goToDrafts = pochtaLogedInPage.clickDrafts();
+        Assert.assertEquals("test20122023@mail.ru", email);//проверить, что вход выполнен успешно
+        PochtaLogedInPage writeNewMessage = pochtaLogedInPage.writeNewMessageAndClickSave();//создать новое письмо (заполнить адресата, тему письма и тело), cj[hfybnm
+        DraftFolderPage goToDrafts = pochtaLogedInPage.clickDrafts();//
+        DraftFolderPage lastMessage = draftFolderPage.findMessage("Сообщение");
+//        String address = draftFolderPage.getTextAddress();
+//        Assert.assertEquals("test1@mail.ru", address);
+//        String theme = draftFolderPage.getTextTheme();
+//        Assert.assertEquals("Тема", theme);
+//        String text = draftFolderPage.getTextTextMessage();
+//        Assert.assertEquals("Сообщение",text);
+
     }
 
 
