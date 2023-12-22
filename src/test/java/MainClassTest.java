@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainClassTest { //проверяю тесты модульно
+public class MainClassTest {
 
     private WebDriver driver;
 //    private MainPage mainPage;
@@ -34,7 +34,7 @@ public class MainClassTest { //проверяю тесты модульно
 
     @Test
     public void csenario1() {
-        PochtaLogedInPage mp = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");// войти в почту
+        PochtaLogedInPage login = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");// войти в почту
         PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
         String email = pochtaLogedInPage.getTextLinkEmail();
         Assert.assertEquals("test20122023@mail.ru", email);//проверить, что вход выполнен успешно
@@ -44,8 +44,8 @@ public class MainClassTest { //проверяю тесты модульно
         String theme = draftFolderPage.getTextTheme();
         if(address.equals("test@mail.ru") && theme.equals("Тема"));{ //проверить  тему письма и адресата
         DraftFolderPage lastMessage = draftFolderPage.clickLastMessage();} //если предыдущие условия ок, то переход на ссылку с письмом, содержащей текст письма, так закрываем 3ю проверку
-        DraftFolderPage sendMessage = draftFolderPage.sendTheMail(); //Отправить письмо
-        DraftFolderPage closeWindow = draftFolderPage.closeWindow(); //закрыть окно после отправки письма
+        DraftFolderPage sendMessage = draftFolderPage.sendTheMail(); //Отправить письмо в черновиках
+        DraftFolderPage closeWindow = draftFolderPage.closeWindow(); //закрыть окно после отправки письма из черновиков
 //      if (!address.equals("test@mail.ru") && !theme.equals("Тема"));{ //проверить  тему письма и адресата последнего письма в черновиках
         DraftFolderPage clickFolderSendMessages = draftFolderPage.clickFolderSendMessages(); //переход в папку Отправленные
        String address1 = sendMessagesPage.getTextEmail();
@@ -54,7 +54,7 @@ public class MainClassTest { //проверяю тесты модульно
            SendMessagesPage logout = sendMessagesPage.logout(); //выход из учетной записи
         }
 
-        }
+    }
 
 
     @After

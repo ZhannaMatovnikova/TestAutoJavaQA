@@ -3,7 +3,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainClass {
+public class MainClass {   //проверка
     static WebDriver driver;
     public static void main(String[] args) {
         driver = new ChromeDriver();
