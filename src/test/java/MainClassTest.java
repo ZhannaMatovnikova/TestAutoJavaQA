@@ -1,6 +1,5 @@
-import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,6 +11,7 @@ public class MainClassTest { //проверяю тесты модульно
     private WebDriver driver;
 //    private MainPage mainPage;
     private MainPageSimple mainPageSimple;
+    private  PochtaLogedInPage pochtaLogedInPage;
 
 
     @Before
@@ -23,18 +23,24 @@ public class MainClassTest { //проверяю тесты модульно
         driver.get("https://account.mail.ru/login/?mode=simple");
 //        mainPage = new MainPage(driver);
         mainPageSimple = new MainPageSimple(driver);
+        pochtaLogedInPage = new PochtaLogedInPage(driver);
+
     }
 
     @Test
-    public void test1() {
-        MainPageSimple mp = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");
+    public void csenario1() {
+        PochtaLogedInPage mp = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");
+        PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
+        String email = pochtaLogedInPage.getTextLinkEmail();
+        Assert.assertEquals("test20122023@mail.ru", email);
+        PochtaLogedInPage writeNewMessage = pochtaLogedInPage.writeNewMessageAndClick();
+        DraftFolderPage goToDrafts = pochtaLogedInPage.clickDrafts();
     }
 
 
 
-    @After
-    @Ignore
-    public void tearDown () {
-        driver.quit();
-    }
+//    @After
+//    public void tearDown () {
+//        driver.quit();
+//    }
 }

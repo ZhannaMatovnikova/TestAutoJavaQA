@@ -1,7 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class DraftFolderPage { // описание страницы при переходе в черновики
+public class DraftFolderPage { // описание страницы при переходе в черновики https://e.mail.ru/drafts/
     private WebDriver driver;
     public DraftFolderPage(WebDriver driver) {
         this.driver = driver;

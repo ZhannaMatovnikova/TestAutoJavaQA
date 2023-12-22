@@ -9,7 +9,7 @@ public class MainClass {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.get("https://account.mail.ru/login/?mode=simple");
+        driver.get("https://account.mail.ru/login");
 
 //        MainPage mainPage = new MainPage(driver);
         MainPageSimple mainPageSimple = new MainPageSimple(driver);

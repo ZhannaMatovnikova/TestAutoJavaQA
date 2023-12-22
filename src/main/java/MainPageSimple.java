@@ -7,7 +7,7 @@ public class MainPageSimple {//описываем форму регистрац�
         this.driver = driver;
     }
 
-    private By loginForm = By.cssSelector("div.wrapper-0-2-5");
+//    private By loginForm = By.cssSelector("div.wrapper-0-2-5");
     private By accountNameField = By.xpath("//input[@name='username']");
 //    private By domenName = By.xpath("//input[@name='username']"); подумать о домене
 
@@ -15,12 +15,13 @@ public class MainPageSimple {//описываем форму регистрац�
     private By passwordField = By.xpath("//input[@name='password']");
     private By loginButtonForm = By.xpath("//button[@type='submit']");
 
-    public MainPageSimple enterLoginName(String name,String password){
-        driver.findElement(accountNameField).sendKeys(name);
-        driver.findElement(addPasswordButton).click();
-        driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(loginButtonForm).click();
-        return this;
+    public PochtaLogedInPage enterLoginName(String name,String password){ //попадаем со страницы регистрации в папку почты
+        driver.findElement(accountNameField).sendKeys(name); //вести логин-почту
+        driver.findElement(addPasswordButton).click(); // клик на кнопку Ввести пароль
+        driver.findElement(passwordField).sendKeys(password); // ввести пароль
+        driver.findElement(loginButtonForm).click(); // войти
+        return new PochtaLogedInPage(driver); // если успех, перейти на страницу
+
 
     }
 }
