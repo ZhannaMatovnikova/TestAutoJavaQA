@@ -1,4 +1,5 @@
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -35,9 +36,9 @@ public class Scenario2UITest {
     @Test
     public void csenario2() {
         PochtaLogedInPage login = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");// войти в почту
-//        PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
-//        String email = pochtaLogedInPage.getTextLinkEmail();
-//        Assert.assertEquals("test20122023@mail.ru", email);//проверить, что вход выполнен успешно
+        PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
+        String email = pochtaLogedInPage.getTextLinkEmail();
+        Assert.assertEquals("test20122023@mail.ru", email);//проверить, что вход выполнен успешно
         PochtaLogedInPage writeNewMessage = pochtaLogedInPage.sendEmailToMyself("Тема1", "Текст");//создать новое письмо себе(заполнить тему письма и тело)
         InboxPageMyself goToInboxMyself = pochtaLogedInPage.clickInboxPageMyself();
         String address = inboxPageMyself.getTextEmailLastEmail();
