@@ -19,6 +19,9 @@ public class PochtaLogedInPage { //описание основной стран�
     private By messageBodyField = By.xpath("(//div[@class='editable-container-2vsf']//div//br)[1]");
     private By saveMessageButton = By.xpath("//button[@data-test-id='save']");
     private By closeWindowNewMessageButton = By.xpath("(//button[@class='container--2lPGK type_base--rkphf color_base--hO-yz'])[3]");
+    private By sendButton = By.xpath("//span[text()='Отправить']");
+    private By closeTheFormAfterSending = By.xpath("/html/body/div[10]/div/div/div[2]/div[2]/div/div/div[1]/span/span[2]");
+    private By inboxMyselfButton = By.xpath("//div[text()='Письма себе']");
 
     public PochtaLogedInPage clickAvatar() {
         driver.findElement(iconAvatar).click();
@@ -51,9 +54,28 @@ public class PochtaLogedInPage { //описание основной стран�
         this.closeFormMessage();
         return this;
     }
+
+    public PochtaLogedInPage sendEmailToMyself(String theme, String text){
+        driver.findElement(newMessageButton).click();
+        driver.findElement(adddressField).click();
+        driver.findElement(By.xpath("//*[contains(text(), 'Письмо себе')]")).click();
+        driver.findElement(themeField).sendKeys(theme);
+        String tab = Keys.chord(Keys.TAB);
+        driver.findElement(themeField).sendKeys(tab, tab, text);
+        driver.findElement(sendButton).click();
+        driver.findElement(closeTheFormAfterSending).click();
+        return this;
+    }
+
+
     public DraftFolderPage clickDrafts(){
         driver.findElement(draftLink).click();
         return new DraftFolderPage(driver);
+    }
+
+    public InboxPageMyself clickInboxPageMyself(){
+        driver.findElement(inboxMyselfButton).click();
+        return new InboxPageMyself(driver);
     }
 
 

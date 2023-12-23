@@ -1,15 +1,18 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class BasketPage {
+public class InboxPageMyself {
     private WebDriver driver;
 
-    public BasketPage(WebDriver driver) {
+    public InboxPageMyself(WebDriver driver) {
         this.driver = driver;
     }
     public By emailLastMessage= By.xpath("(//span[contains(text(), 'Тест Тестов')])[1]");
     public By themeLastMessage= By.xpath("(//span[contains(text(), 'Тема1')])[1]");
     public By textLastMessage = By.xpath("(//span[contains(text(), 'Текст')])[1]");
+    public By checkEmailLastMessage= By.xpath("(//span[contains(text(), 'Отправлено из Почты')])[1]");
+    public By deleteMessage= By.xpath("//div[text()='Удалить']");
+    public By basketFolderLink= By.xpath("(//div[text()='Корзина'])[1]");
 
     public String getTextEmailLastEmail(){
         return driver.findElement(emailLastMessage).getText();
@@ -20,13 +23,18 @@ public class BasketPage {
     public String getTextTextLastEmail(){
         return driver.findElement(textLastMessage).getText();
     }
-    private By iconAvatar = By.cssSelector("img.ph-avatar-img.svelte-dfhuqc");
-    private By logOut = By.xpath("//div[text()='Выйти']");
-
-    public BasketPage logout(){
-        driver.findElement(iconAvatar).click();
-        driver.findElement(logOut).click();
+    public InboxPageMyself clickLastMessage(){
+        driver.findElement(checkEmailLastMessage).click();
         return this;
     }
 
+    public InboxPageMyself deleteMessage(){
+        driver.findElement(deleteMessage).click();
+        return this;
+    }
+
+    public BasketPage goToFolderBasket(){
+        driver.findElement(basketFolderLink).click();
+        return new BasketPage(driver);
+    }
 }
