@@ -17,6 +17,7 @@ public class MainClassTest {
     private SendMessagesPage sendMessagesPage;
 
 
+
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Жанна\\IdeaProjects\\driver\\chromedriver.exe");

@@ -7,9 +7,9 @@ public class InboxPageMyself {
     public InboxPageMyself(WebDriver driver) {
         this.driver = driver;
     }
-    public By emailLastMessage= By.xpath("(//span[contains(text(), 'Тест Тестов')])[1]");
-    public By themeLastMessage= By.xpath("(//span[contains(text(), 'Тема1')])[1]");
-    public By textLastMessage = By.xpath("(//span[contains(text(), 'Текст')])[1]");
+    public By emailLastMessage= By.xpath("(//span[contains(text(),'Тест Тестов')])[1]");
+    public By themeLastMessage= By.xpath("(//span[text()='"+PochtaLogedInPage.themeMessage+"'])[1]");
+    public By textLastMessage = By.xpath("(//span[contains(text(), '"+PochtaLogedInPage.textMessage+"')])[1]");
     public By checkEmailLastMessage= By.xpath("(//span[contains(text(), 'Отправлено из Почты')])[1]");
     public By deleteMessage= By.xpath("//div[text()='Удалить']");
     public By basketFolderLink= By.xpath("(//div[text()='Корзина'])[1]");

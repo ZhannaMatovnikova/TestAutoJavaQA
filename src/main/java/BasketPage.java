@@ -7,9 +7,9 @@ public class BasketPage {
     public BasketPage(WebDriver driver) {
         this.driver = driver;
     }
-    public By emailLastMessage= By.xpath("(//span[contains(text(), 'Тест Тестов')])[1]");
-    public By themeLastMessage= By.xpath("(//span[contains(text(), 'Тема1')])[1]");
-    public By textLastMessage = By.xpath("(//span[contains(text(), 'Текст')])[1]");
+    public By emailLastMessage= By.xpath("(//span[contains(text(),'Тест Тестов')])[1]");//
+    public By themeLastMessage= By.xpath("(//span[text()='" + PochtaLogedInPage.themeMessage + "'])[1]");//
+    public By textLastMessage = By.xpath("(//span[contains(text(), '" + PochtaLogedInPage.textMessage + "')])[1]");//
 
     public String getTextEmailLastEmail(){
         return driver.findElement(emailLastMessage).getText();

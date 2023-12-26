@@ -2,9 +2,13 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class Scenario1UITest {
@@ -15,6 +19,13 @@ public class Scenario1UITest {
     private  PochtaLogedInPage pochtaLogedInPage;
     private DraftFolderPage draftFolderPage;
     private SendMessagesPage sendMessagesPage;
+    private final static String emailToLogin = "test20122023@mail.ru";// задаем почту для login - отправитель
+    private final static String passwordToLogin = "20122023Tt!";// пароль почты отправителя
+    private final static String addressEmailToWhomWriteMessage = PochtaLogedInPage.addressEmailToWhomWriteMessage;
+    private final static String themeMessage = PochtaLogedInPage.themeMessage;
+    private final static String textMessage = PochtaLogedInPage.textMessage;
+
+
 
 
     @Before
@@ -34,23 +45,25 @@ public class Scenario1UITest {
 
     @Test
     public void csenario1() {
-        PochtaLogedInPage login = mainPageSimple.enterLoginName("test20122023", "20122023Tt!");// войти в почту
+        PochtaLogedInPage login = mainPageSimple.enterLoginName(emailToLogin, passwordToLogin);// войти в почту
         PochtaLogedInPage check = pochtaLogedInPage.clickAvatar();
         String email = pochtaLogedInPage.getTextLinkEmail();
-        Assert.assertEquals("test20122023@mail.ru", email);//проверить, что вход выполнен успешно
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@aria-label='"+emailToLogin+ "'])[2]")));
+        Assert.assertEquals(emailToLogin, email);//проверить, что вход выполнен успешно
         PochtaLogedInPage writeNewMessage = pochtaLogedInPage.writeNewMessageAndClickSave();//создать новое письмо (заполнить адресата, тему письма и тело), сохранить как черновик
         DraftFolderPage goToDrafts = pochtaLogedInPage.clickDrafts();// Проверить сохранение в черновиках
         String address = draftFolderPage.getTextAddress();
         String theme = draftFolderPage.getTextTheme();
-        if(address.equals("test@mail.ru") && theme.equals("Тема"));{ //проверить  тему письма и адресата
+        if(address.equals(addressEmailToWhomWriteMessage) && theme.equals(themeMessage));{ //проверить  тему письма и адресата
         DraftFolderPage lastMessage = draftFolderPage.clickLastMessage();} //если предыдущие условия ок, то переход на ссылку с письмом, содержащей текст письма, так закрываем 3ю проверку
         DraftFolderPage sendMessage = draftFolderPage.sendTheMail(); //Отправить письмо в черновиках
         DraftFolderPage closeWindow = draftFolderPage.closeWindow(); //закрыть окно после отправки письма из черновиков
-//      if (!address.equals("test@mail.ru") && !theme.equals("Тема"));{ //проверить  тему письма и адресата последнего письма в черновиках
+//      if (!address.equals("test@mail.ru") && !theme.equals("Тема")&&);{ //TODO проверить, что письмо отправлено из черновиков
         DraftFolderPage clickFolderSendMessages = draftFolderPage.clickFolderSendMessages(); //переход в папку Отправленные
        String address1 = sendMessagesPage.getTextEmail();
        String theme1 = sendMessage.getTextTheme();
-       if(address1.equals("test@mail.ru") && theme1.equals("Тема"));{ // проверка последней темы письма и адреса отправки
+       if(address1.equals(addressEmailToWhomWriteMessage) && theme1.equals(themeMessage));{ // проверка последней темы письма и адреса отправки
            SendMessagesPage logout = sendMessagesPage.logout(); //выход из учетной записи
         }
 

@@ -22,6 +22,9 @@ public class PochtaLogedInPage { //описание основной стран�
     private By sendButton = By.xpath("//span[text()='Отправить']");
     private By closeTheFormAfterSending = By.xpath("/html/body/div[10]/div/div/div[2]/div[2]/div/div/div[1]/span/span[2]");
     private By inboxMyselfButton = By.xpath("//div[text()='Письма себе']");
+    public final static String addressEmailToWhomWriteMessage = "test@mail.ru";// задаем почту "Кому"
+    public final static String themeMessage = "Тема";//задаем тему исходящего письма
+    public final static String textMessage = "Текст12345";//задаем сообщение письма
 
     public PochtaLogedInPage clickAvatar() {
         driver.findElement(iconAvatar).click();
@@ -49,7 +52,7 @@ public class PochtaLogedInPage { //описание основной стран�
     }
 
     public PochtaLogedInPage writeNewMessageAndClickSave(){
-        this.writeNewMessage("test@mail.ru", "Тема", "Сообщение");
+        this.writeNewMessage(addressEmailToWhomWriteMessage, themeMessage, textMessage);
         this.saveMessageClick();
         this.closeFormMessage();
         return this;
